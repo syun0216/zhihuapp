@@ -1,0 +1,35 @@
+{
+  "name": "zhihurn",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "bundle-ios": "node node_modules/react-native/local-cli/cli.js bundle --entry-file index.ios.js  --platform ios --dev false --bundle-output ./ios/bundle/index.ios.jsbundle --assets-dest ./ios/bundle"
+  },
+  "dependencies": {
+    "axios": "^0.16.2",
+    "native-base": "^2.3.1",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.47.1",
+    "react-native-css": "^2.0.7",
+    "react-native-htmlview": "^0.12.0",
+    "react-native-linear-gradient": "^2.3.0",
+    "react-native-modal": "^3.1.0",
+    "react-native-swiper": "^1.5.5",
+    "react-native-vector-icons": "^4.0.1",
+    "react-navigation": "^1.0.0-beta.11"
+  },
+  "devDependencies": {
+    "babel-jest": "20.0.3",
+    "babel-preset-react-native": "2.1.0",
+    "jest": "20.0.4",
+    "react-test-renderer": "16.0.0-alpha.12"
+  },
+  "jest": {
+    "preset": "react-native",
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|native-base-shoutem-theme|@shoutem/animation|@shoutem/ui|tcomb-form-native)"
+    ]
+  }
+}
