@@ -2,8 +2,6 @@
 
 ## DEMO
 
-### ios
-![](./resource/ezgif.com-crop.gif)
-
-### android
-![](./resource/zhihuandroid.gif)
+### ios / android
+![Preview](./resource/ezgif.com-crop.gif)
+![Preview](./resource/zhihuandroid.gif)
