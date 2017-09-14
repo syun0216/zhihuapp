@@ -367,6 +367,7 @@ class DashBoardView extends Component {
             onEndReached={() => this._onPullToRequestNextPageData()}
             onEndReachedThreshold={10}
             scrollRenderAheadDistance={50}
+            removeClippedSubviews={false} //修正安卓轮播图不显示问题
             // onMomentumScrollEnd={() => this._listenScroll()}
             onScroll={(sview) => this._getListViewData(sview)}
             scrollEventThrottle={20}

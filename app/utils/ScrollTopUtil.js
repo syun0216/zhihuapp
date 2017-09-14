@@ -14,7 +14,7 @@ export default class ScrollTopUtil extends Component {
                 outputRange: [-150, 50]
             })}} >
                 <Button transparent onPress={this.props.toTop}>
-                    <Image source={require('../assets/top.png')} style={{width: 40, height: 40}}/>
+                    <Image source={require('../assets/top.png')} style={{width: 38, height: 38}}/>
                 </Button>
             </Animated.View>
         )
