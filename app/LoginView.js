@@ -72,7 +72,7 @@ export default class LoginView extends Component {
 
     render() {
         return (
-                Platform.OS === 'android' ? this._renderAndroidMainLoginView() : this._renderIosMainLoginView()
+            Platform.OS === 'android' ? this._renderAndroidMainLoginView() : this._renderIosMainLoginView()
         );
 
     }
@@ -125,7 +125,6 @@ export default class LoginView extends Component {
                             <Button style={{margin:20,backgroundColor:Colors.main_yellow}} block  onPress={() => this._register()}>
                                 <Text>注册</Text>
                             </Button>
-                            <Button transparent block style={{marginTop:5}}><Text style={{color:Colors.main_red}}>没有账号？去注册</Text></Button>
                         </Content>
                     </Container>
                 </View>
@@ -137,7 +136,7 @@ export default class LoginView extends Component {
         return (
             <View style={{flex: 1, backgroundColor: 'transparent',}}>
                 {this._renderRegisterView()}
-                <NewStatusBar iosBgColor="transparent" iosHeight={0} barStyle="light-content"/>
+                <NewStatusBar iosBgColor="transparent" androidBgColor="black" iosHeight={0} barStyle="light-content"/>
                 <View>
                     <Image resizeMode="cover" style={{
                         height: _winHeight,
@@ -155,7 +154,7 @@ export default class LoginView extends Component {
                         zIndex: 0
                     }}/>
                 </View>
-                <ScrollView style={{position: 'relative'}}>
+                <ScrollView style={{position: 'relative'}} >
                     <View style={{flex: 1}}>
                         <Button onPress={() => this.props.navigation.goBack()} transparent
                                 style={{position: 'absolute', top: 25, right: 10, zIndex: 20}}>
@@ -299,16 +298,163 @@ export default class LoginView extends Component {
 
     _renderAndroidMainLoginView(){
         return (
-            <Container>
-                <Header style={{backgroundColor:'white'}}>
-                    <Left>
-                        <Button transparent onPress={() => this.props.navigation.goBack()}><Icon name='arrow-back' style={{fontSize:24,color:'#959595'}}/></Button>
-                    </Left>
-                    <Body><Text>用户登录</Text></Body>
-                    <Right></Right>
-                </Header>
-                {this._renderLoginView()}
-            </Container>
+            <View style={{flex: 1, backgroundColor: 'transparent',}}>
+                {this._renderRegisterView()}
+                <NewStatusBar iosBgColor="transparent" androidBgColor="black" iosHeight={0} barStyle="light-content"/>
+                <View>
+                    <Image resizeMode="cover" style={{
+                        height: _winHeight,
+                        width: _winWidth,
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: 0
+                    }} source={{uri: 'bg'}}/>
+                    <View style={{
+                        height: _winHeight,
+                        width: _winWidth, backgroundColor: Colors.fontBlack, opacity: 0.5, position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: 0
+                    }}/>
+                </View>
+                <ScrollView style={{position: 'relative'}} >
+                    <View style={{flex: 1}}>
+                        <Button onPress={() => this.props.navigation.goBack()} transparent
+                                style={{position: 'absolute', top: 25, right: 10, zIndex: 20}}>
+                            <Image style={{width: 18, height: 18}} source={require('./assets/close.png')}/>
+                        </Button>
+                        <View style={{
+                            flex: 1,
+                            alignItems: 'center',
+                            justifyContent: 'flex-end',
+                            width: _winWidth,
+                            height: 150,
+                            marginTop:100
+                        }}>
+                            <Animated.View style={{
+                                transform: [{
+                                    rotateZ: this.state.rotateValue.interpolate({
+                                        inputRange: [0, 1],
+                                        outputRange: ['0deg', '360deg']
+                                    })
+                                }],
+                                width: 80, height: 80
+                            }}>
+                                <Image style={{width: 80, height: 80}} source={require('./assets/react.png')}/>
+                            </Animated.View>
+                            <View
+                                style={{
+                                    flex: 1,
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    width: _winWidth,
+                                    height: 30
+                                }}>
+                                <Text style={{color: 'white',fontSize:18}}>知乎日报</Text>
+                            </View>
+                        </View>
+
+                        <View style={{
+                            flex: 1,
+                            alignItems: 'center',
+                            width: _winWidth,
+                            marginTop: 50,
+                            // position: 'absolute',
+                            // top: 0.35 * _winHeight,
+                            // left: 0
+                        }}>
+                            <View style={{
+                                flex: 1,
+                                width: 0.8 * _winWidth,
+                                height: 50,
+                                backgroundColor: '#000',
+                                marginBottom: 10,
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                opacity: 0.6
+                            }}>
+                                <View style={{width: 40, paddingLeft: 10}}><Image source={require("./assets/phone.png")}
+                                                                                  style={{
+                                                                                      width: 22,
+                                                                                      height: 22,
+                                                                                      marginTop: -2
+                                                                                  }}/></View>
+                                <View style={{flex: 1, alignItems: 'flex-start', justifyContent: 'center'}}>
+                                    <Input
+                                        style={{color: 'white', width: _winWidth * 0.55}}
+                                        onChangeText={(phone) => this._getPhone(phone)}
+                                        multiline={false}
+                                        autoFocus={false}
+                                        placeholder='请输入手机号'
+                                        keyboardType='numeric'
+                                        clearButtonMode='while-editing'
+                                        placeholderTextColor='gray'
+                                        maxLength={11}
+                                        returnKeyType='done'/></View>
+                            </View>
+                            <View style={{
+                                flex: 1,
+                                width: 0.8 * _winWidth,
+                                height: 50,
+                                backgroundColor: '#000',
+                                marginBottom: 5,
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                opacity: 0.6
+                            }}>
+                                <View style={{width: 40, paddingLeft: 10}}><Image
+                                    source={require("./assets/password.png")}
+                                    style={{width: 20, height: 20, marginTop: -2}}/></View>
+                                <View style={{flex: 1, alignItems: 'flex-start', justifyContent: 'center'}}>
+                                    <Input
+                                        style={{color: 'white', width: _winWidth * 0.55}}
+                                        onChangeText={(password) => this._getPassword(password)}
+                                        multiline={false}
+                                        autoFocus={false}
+                                        placeholder='请输入密码'
+                                        clearButtonMode='while-editing'
+                                        placeholderTextColor='gray'
+                                        returnKeyType='done'
+                                        secureTextEntry={true}/></View>
+                            </View>
+                            <View style={{
+                                width: _winWidth,
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                marginTop: 20
+                            }}>
+                                <TouchableOpacity style={{
+                                    width: _winWidth * 0.6,
+                                    height: 50,
+                                    backgroundColor: Colors.main_yellow,
+                                    flex: 1,
+                                    alignItems: 'center',
+                                    borderRadius: 25,
+                                    justifyContent: 'center'
+                                }} onPress={() => this._login()}><View>
+                                    <Text style={{color: 'white'}}>登录</Text>
+
+                                </View>
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{width: _winWidth, height: 20, marginTop: 15}}>
+                                <Text style={{textAlign: 'center', fontSize: 12, color: 'white'}}>忘记密码？</Text>
+                            </View>
+
+                        </View>
+
+                    </View>
+                </ScrollView>
+                <View style={{position: 'absolute', bottom: 0, left: 0.1 * _winWidth, opacity: 0.5}}>
+                    <View style={{width: 0.8 * _winWidth, borderTopColor: 'white', borderTopWidth: 1,}}>
+                        <Text onPress={() => this.setState({isModalVisible:true})} style={{textAlign: 'center', color: 'white', padding: 10, fontSize: 12}}>新用户？点击注册</Text>
+                    </View>
+                </View>
+            </View>
         )
     }
 

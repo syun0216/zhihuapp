@@ -304,6 +304,9 @@ class DashBoardView extends Component {
     render() {
         return (
             <Container style={{backgroundColor:Colors.fontBlack}}>
+                {Platform.OS === 'android' ? <NewStatusBar androidBgColor="black"/> : <NewStatusBar androidBgColor="black" networkVisible={this.state.isHttpRequesting}
+                                                                                                    iosBgColor="transparent" iosHeight={0}
+                                                                                                    barStyle="light-content"/>}
                 <NewStatusBar androidBgColor="black" networkVisible={this.state.isHttpRequesting}
                               iosBgColor="transparent" iosHeight={0}
                               barStyle="light-content"/>
@@ -325,7 +328,7 @@ class DashBoardView extends Component {
                 }
 
                 {this._renderLoadingView()}
-                {this.state.firstPageLoadingStatus === LOAD_FAILED ? this._renderErrorView() : null}
+                {this.state.firstPageLoadingStatus === LOAD_FAILED && this.state.titleData === null  ? this._renderErrorView() : null}
                 {/*<Content>*/}
                 {this.state.titleData === null ? null : this._renderNewsListView()}
                 {/*</Content>*/}
