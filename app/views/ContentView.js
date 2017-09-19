@@ -111,14 +111,20 @@ export default class ContentView extends Component {
                     .then((isInstalled) => {
                         if (isInstalled) {
                             WeChat.shareToTimeline({
-                                title: 'jw daily',
-                                description: this.state.newsContent.title,
+                                title: this.state.newsContent.title,
+                                description: 'jw daily',
                                 thumbImage: this.state.newsContent.images[0],
                                 type: 'news',
                                 webpageUrl: this.state.newsContent.share_url
                             })
                                 .catch((error) => {
-                                    ToastUtil.show(error.message, 1000, 'bottom','danger');
+                                    if(error.message == -2){
+                                        ToastUtil.show('分享失败', 1000, 'bottom','danger');
+
+                                    }
+                                    else{
+                                        ToastUtil.show('分享成功', 1000, 'bottom','success');
+                                    }
                                 });
                         } else {
                             ToastUtil.show('没有安装微信软件，请您安装微信之后再试', 1000, 'bottom','danger');
@@ -136,12 +142,18 @@ export default class ContentView extends Component {
                                 webpageUrl: this.state.newsContent.share_url
                             })
                                 .catch((error) => {
-                                    ToastUtil.show(error.message, 1000, 'bottom','danger');
+                                if(error.message == -2){
+                                    ToastUtil.show('分享失败', 1000, 'bottom','danger');
+
+                                }
+                                else{
+                                    ToastUtil.show('分享成功', 1000, 'bottom','success');
+                                }
                                 });
                         } else {
                             ToastUtil.show('没有安装微信软件，请您安装微信之后再试', 1000, 'bottom','danger');
                         }
-                    });
+                    });break;
         }
 
     }
