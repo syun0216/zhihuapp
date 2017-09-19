@@ -1,5 +1,18 @@
 import React, {Component} from 'react';
-import {View, Text, WebView,ScrollView, Dimensions, Image, StyleSheet,Animated,Easing,TouchableWithoutFeedback,Platform} from 'react-native';
+import {
+    View,
+    Text,
+    WebView,
+    ScrollView,
+    Dimensions,
+    Image,
+    StyleSheet,
+    Animated,
+    Easing,
+    TouchableWithoutFeedback,
+    Platform,
+    TouchableOpacity
+} from 'react-native';
 import {
     Container,
     Header,
@@ -24,6 +37,9 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ToastUtil from '../utils/ToastUtil';
 import Colors from '../utils/Colors';
 
+let WeChat = require('react-native-wechat');
+
+
 _winWidth = Dimensions.get('window').width;
 _winHeight = Dimensions.get('window').height;
 export default class ContentView extends Component {
@@ -34,6 +50,8 @@ export default class ContentView extends Component {
 
     constructor(props) {
         super(props);
+
+        WeChat.registerApp('wxde5c4e0148d6b550');
         this._top = props.navigation.state.params.preRoute === 'DashBoard' ? -220 : 0;
         // 初始状态
         this.state = {
@@ -42,11 +60,11 @@ export default class ContentView extends Component {
             favoriteChecked: false,
             commentsCount: 0,
             LoadStatus: true,
-            positionTop:new Animated.Value(0),
-            fadeInOpacity:new Animated.Value(0),
-            showShareList:false,
-            statusBarHeight:0,
-            bounceWidth:0
+            positionTop: new Animated.Value(0),
+            fadeInOpacity: new Animated.Value(0),
+            showShareList: false,
+            statusBarHeight: 0,
+            bounceWidth: 0
         };
     }
 
@@ -61,7 +79,8 @@ export default class ContentView extends Component {
         return (
             <Container>
                 {Platform.OS === 'android' ? <NewStatusBar androidBgColor="black"/> :
-                <NewStatusBar style={{opacity:0}} networkVisible={this.state.isHttpRequesting} androidBgColor="black" iosHeight={0} iosBgColor="white" borderBottom={1}/>}
+                    <NewStatusBar style={{opacity: 0}} networkVisible={this.state.isHttpRequesting}
+                                  androidBgColor="black" iosHeight={0} iosBgColor="white" borderBottom={1}/>}
                 {this._renderFullLoadingView()}
                 {this.state.newsContent === null ?
                     null : this._renderMainContentView()}
@@ -83,6 +102,48 @@ export default class ContentView extends Component {
             ToastUtil.show('api goes wrong', 1000);
             // console.log('api goes wrong');
         })
+    }
+
+    _shareMonents(type){
+        switch (type){
+            case "moments":
+                WeChat.isWXAppInstalled()
+                    .then((isInstalled) => {
+                        if (isInstalled) {
+                            WeChat.shareToTimeline({
+                                title: 'jw daily',
+                                description: this.state.newsContent.title,
+                                thumbImage: this.state.newsContent.images[0],
+                                type: 'news',
+                                webpageUrl: this.state.newsContent.share_url
+                            })
+                                .catch((error) => {
+                                    ToastUtil.show(error.message, 1000, 'bottom','danger');
+                                });
+                        } else {
+                            ToastUtil.show('没有安装微信软件，请您安装微信之后再试', 1000, 'bottom','danger');
+                        }
+                    });break;
+            case "friends":
+                WeChat.isWXAppInstalled()
+                    .then((isInstalled) => {
+                        if (isInstalled) {
+                            WeChat.shareToSession({
+                                title: 'jw daily',
+                                description: this.state.newsContent.title,
+                                thumbImage: this.state.newsContent.images[0],
+                                type: 'news',
+                                webpageUrl: this.state.newsContent.share_url
+                            })
+                                .catch((error) => {
+                                    ToastUtil.show(error.message, 1000, 'bottom','danger');
+                                });
+                        } else {
+                            ToastUtil.show('没有安装微信软件，请您安装微信之后再试', 1000, 'bottom','danger');
+                        }
+                    });
+        }
+
     }
 
     _requestNewsContent(id) {
@@ -135,7 +196,9 @@ export default class ContentView extends Component {
                     </html>`;
                 // let _html = `<div><p style="color:red">这是测试的html</p></div>`
                 data.data.html = _html;
-                setTimeout(() => {this.setState({isHttpRequesting: false, newsContent: data.data});},400)
+                setTimeout(() => {
+                    this.setState({isHttpRequesting: false, newsContent: data.data});
+                }, 400)
                 // this.setState({isHttpRequesting: false, newsContent: data.data});
                 // console.log(this.state.newsContent);
             }
@@ -163,38 +226,62 @@ export default class ContentView extends Component {
         }}/>;
     }
 
-    _renderPreventClickView(){
+    _renderPreventClickView() {
         return this.state.showShareList ? <TouchableWithoutFeedback onPress={() => this._toHideShareListView()}>
-            <View style={{width:_winWidth,height:_winHeight,position:'absolute',zIndex:99,top:0,left:0,backgroundColor:'#5b7492',opacity:0.3}}/>
+            <View style={{
+                width: _winWidth,
+                height: _winHeight,
+                position: 'absolute',
+                zIndex: 99,
+                top: 0,
+                left: 0,
+                backgroundColor: '#5b7492',
+                opacity: 0.3
+            }}/>
         </TouchableWithoutFeedback> : null;
     }
 
-    _renderShareView(){
+    _renderShareView() {
         return (
-            <Animated.View style={{flex:1,flexDirection:'column',backgroundColor:'white',position:'absolute',zIndex:1000,borderTopWidth:1,borderTopColor:'#ccc',width:_winWidth,height:150, bottom: this.state.positionTop.interpolate({
-                inputRange: [0, 1],
-                outputRange: [-150, 0]
-            }),
-                opacity: this.state.fadeInOpacity}}>
-                <View style={{width:_winWidth,height:40,borderBottomWidth:1,borderColor:"#ccc"}}>
-                    <Text style={{flex:1,textAlign:'center',marginTop:13,color:Colors.fontBlack}}>分享文章</Text>
+            <Animated.View style={{
+                flex: 1,
+                flexDirection: 'column',
+                backgroundColor: 'white',
+                position: 'absolute',
+                zIndex: 1000,
+                borderTopWidth: 1,
+                borderTopColor: '#ccc',
+                width: _winWidth,
+                height: 150,
+                bottom: this.state.positionTop.interpolate({
+                    inputRange: [0, 1],
+                    outputRange: [-150, 0]
+                }),
+                opacity: this.state.fadeInOpacity
+            }}>
+                <View style={{width: _winWidth, height: 40, borderBottomWidth: 1, borderColor: "#ccc"}}>
+                    <Text style={{flex: 1, textAlign: 'center', marginTop: 13, color: Colors.fontBlack}}>分享文章</Text>
                 </View>
-                <View style={{flex:1,flexDirection:'row'}}>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                        <Image style={{width:32,height:32}} source={require('../assets/moments.png')}/>
-                        <Text style={{fontSize:12,color:Colors.fontBlack,marginTop:10}}>朋友圈</Text>
+                <View style={{flex: 1, flexDirection: 'row'}}>
+                    <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} onPress={() => this._shareMonents('moments')}>
+                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Image style={{width: 32, height: 32}} source={require('../assets/moments.png')}/>
+                            <Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 10}}>朋友圈</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={{flex: 1, alignItems: 'center', justifyContent: 'center'}} onPress={() => this._shareMonents('friends')}>
+                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Image style={{width: 36, height: 36}} source={require('../assets/wechat.png')}/>
+                            <Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 6}}>微信好友</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Image style={{width: 36, height: 36}} source={require('../assets/qq.png')}/>
+                        <Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 4}}>qq</Text>
                     </View>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                        <Image style={{width:36,height:36}} source={require('../assets/wechat.png')}/>
-                        <Text style={{fontSize:12,color:Colors.fontBlack,marginTop:6}}>微信好友</Text>
-                    </View>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                        <Image style={{width:36,height:36}} source={require('../assets/qq.png')}/>
-                        <Text style={{fontSize:12,color:Colors.fontBlack,marginTop:4}}>qq</Text>
-                    </View>
-                    <View style={{flex:1,alignItems:'center',justifyContent:'center'}}>
-                        <Image style={{width:32,height:32}} source={require('../assets/weibo.png')}/>
-                        <Text style={{fontSize:12,color:Colors.fontBlack,marginTop:10}}>微博</Text>
+                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Image style={{width: 32, height: 32}} source={require('../assets/weibo.png')}/>
+                        <Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 10}}>微博</Text>
                     </View>
                 </View>
             </Animated.View>
@@ -208,19 +295,19 @@ export default class ContentView extends Component {
                 {this.state.showShareList ? this._renderPreventClickView() : null}
                 {this._renderShareView()}
                 {/*<ScrollView*/}
-                    {/*onScroll={(scrollview) => this._getScrollPosition(scrollview)}*/}
-                    {/*scrollEventThrottle={15}>*/}
-                    {/*<View>*/}
-                        <WebView bounces={true}
-                                 scalesPageToFit={true}
-                                 source={{html: this.state.newsContent.html}}
-                                 style={{width: _winWidth, height: _winHeight}}>
-                        </WebView>
-                    {/*</View>*/}
+                {/*onScroll={(scrollview) => this._getScrollPosition(scrollview)}*/}
+                {/*scrollEventThrottle={15}>*/}
+                {/*<View>*/}
+                <WebView bounces={true}
+                         scalesPageToFit={true}
+                         source={{html: this.state.newsContent.html}}
+                         style={{width: _winWidth, height: _winHeight}}>
+                </WebView>
+                {/*</View>*/}
                 {/*</ScrollView>*/}
-                    {/*<View style={{flex:1,justifyContent:'center',alignItems:'center',height:200}}>*/}
-                        {/*<View style={{height:3,width:this.state.bounceWidth,backgroundColor:Colors.main_blue}}/>*/}
-                    {/*</View>*/}
+                {/*<View style={{flex:1,justifyContent:'center',alignItems:'center',height:200}}>*/}
+                {/*<View style={{height:3,width:this.state.bounceWidth,backgroundColor:Colors.main_blue}}/>*/}
+                {/*</View>*/}
                 <Footer style={{backgroundColor: 'white'}}>
                     <Button transparent style={styles.bottomButton} onPress={() => this.props.navigation.goBack()}><Icon
                         name='arrow-back' style={{color: '#959595'}}/></Button>
@@ -228,7 +315,8 @@ export default class ContentView extends Component {
                             onPress={() => this._toNextArticle()}><MaterialCommunityIcons name="chevron-double-down"
                                                                                           style={[styles.IconStyle, {fontSize: 22}]}/></Button>
                     <Button transparent style={styles.bottomButton}
-                            onPress={() => this._toShowShareListView()}><MaterialCommunityIcons name="share-variant" style={[styles.IconStyle, {fontSize: 18}]}/></Button>
+                            onPress={() => this._toShowShareListView()}><MaterialCommunityIcons name="share-variant"
+                                                                                                style={[styles.IconStyle, {fontSize: 18}]}/></Button>
                     <Button transparent style={styles.bottomButton} onPress={() => this.addNewsToFavorite()}>
                         {this.state.favoriteChecked ?
                             <MaterialIcons name='favorite' style={{fontSize: 20, color: '#ff5858'}}/> :
@@ -246,7 +334,7 @@ export default class ContentView extends Component {
                             position: 'absolute',
                             top: 0,
                             color: '#ff5858',
-                            left:35
+                            left: 35
                         }}>{this.state.commentsCount}</Text>
                     </Button>
                 </Footer>
@@ -283,9 +371,9 @@ export default class ContentView extends Component {
         // }
     }
 
-    _toShowShareListView(){
+    _toShowShareListView() {
         this.setState({
-            showShareList:true
+            showShareList: true
         });
         Animated.parallel(['fadeInOpacity', 'positionTop'].map(property => {
             return Animated.spring(this.state[property], {
@@ -296,11 +384,11 @@ export default class ContentView extends Component {
         })).start();
     }
 
-    _toHideShareListView(){
+    _toHideShareListView() {
         this.setState({
-            showShareList:false
+            showShareList: false
         });
-        Animated.sequence([ 'positionTop'].map(property => {
+        Animated.sequence(['positionTop'].map(property => {
             return Animated.timing(this.state[property], {
                 toValue: 0,
                 duration: 400,

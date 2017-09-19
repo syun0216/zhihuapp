@@ -37,7 +37,7 @@ export default class CommonHeaderView extends Component {
                     {/*<View>*/}
                         <Button  transparent
                                 onPress={() => navigation.navigate('DrawerOpen', {id: 1})}>
-                            <Image style={{width: 20, height: 20}} source={require('../assets/menu.png')}/>
+                            <Image style={{width: 22, height: 22}} source={require('../assets/menu.png')}/>
                         </Button>
                         {/*<Text style={{*/}
                             {/*color: 'white',*/}

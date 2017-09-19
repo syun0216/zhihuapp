@@ -31,6 +31,9 @@
 # Do not strip any method/class that is annotated with @DoNotStrip
 -keep @com.facebook.proguard.annotations.DoNotStrip class *
 -keep @com.facebook.common.internal.DoNotStrip class *
+-keep class com.tencent.mm.sdk.** {
+   *;
+}
 -keepclassmembers class * {
     @com.facebook.proguard.annotations.DoNotStrip *;
     @com.facebook.common.internal.DoNotStrip *;

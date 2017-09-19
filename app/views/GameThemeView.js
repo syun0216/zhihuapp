@@ -89,22 +89,19 @@ export default class DailyThemeView extends Component{
                                                                   iosHeight={_statusBarSetting.iosHeight} barStyle={_statusBarSetting.barStyle}
                 />}
                 {/*<CommonHeaderView statusBarSetting={_statusBarSetting} isLoading={this.state.isHttpRequesting} headerName="动漫日报" navigation={this.props.navigation}/>*/}
-                <Button style={{position: 'absolute', top: 18, left: 5, zIndex: 1000}} transparent
+                <Button style={{position: 'absolute', top: 18, left: 25, zIndex: 1000}} transparent
                         onPress={() => this.props.navigation.navigate('DrawerOpen', {id: 1})}>
                     <View style={{
                         width: 30,
                         height: 30,
                         backgroundColor: '#000',
-                        // flex: 1,
-                        // alignItems: "center",
-                        // justifyContent: 'center',
                         borderRadius:15,
                         position:'relative',
                         opacity:this.state.fadeOpacity,
                         position:"absolute",
-                        left:10
+                        left:-2
                     }} />
-                    <Image style={{width: 18, height: 18,}} source={require('../assets/menu.png')}/>
+                    <Image style={{width: 22, height: 22,}} source={require('../assets/menu.png')}/>
 
                 </Button>
                 {this._renderFullLoadingView()}

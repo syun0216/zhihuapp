@@ -16,7 +16,6 @@ import {
 } from 'react-native';
 import {FontAwesome} from 'react-native-vector-icons/FontAwesome';
 import LinearGradient from 'react-native-linear-gradient';
-import CardStackStyleInterpolator from 'react-navigation/src/views/CardStackStyleInterpolator';
 import {
     Container,
     Header,
@@ -62,6 +61,7 @@ import ScrollTopUtil from "./utils/ScrollTopUtil";
 import Colors from './utils/Colors';
 
 import UserStore from './store/UserStore';
+import TestWechat from './testWechat';
 
 const LOADING = 0;
 const LOAD_SUCCESS = 1;
@@ -321,9 +321,9 @@ class DashBoardView extends Component {
                         <Right>
                         </Right>
                     </Header> :
-                    <Button style={{position: 'absolute', zIndex: 1000, top: 10, left: 5}} transparent
+                    <Button style={{position: 'absolute', zIndex: 1000, top: 13, left: 23}} transparent
                             onPress={() => this.props.navigation.navigate('DrawerOpen', {id: 1})}>
-                        <Image style={{width: 20, height: 20}} source={require('./assets/menu.png')}/>
+                        <Image style={{width: 22, height: 22}} source={require('./assets/menu.png')}/>
                     </Button>
                 }
 
@@ -661,7 +661,7 @@ const DashDrawerPage = DrawerNavigator({
                             <Image style={{width: 60, height: 60}} source={require('./assets/person.png')}/>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                            <Text style={{
+                            <Text onLongPress={() => props.navigation.navigate('Test')} style={{
                                 color: '#95999D',
                                 marginTop: 5
                             }}>请先登录</Text>
@@ -700,7 +700,8 @@ let mainView = StackNavigator({
     // Dash: {screen: DashBoardView},
     Content: {screen: ContentView},
     Comment: {screen: CommentView},
-    Login: {screen: LoginView}
+    Login: {screen: LoginView},
+    Test: {screen: TestWechat},
 }, {
     // initialRouteName: 'DashDrawerPage',
     headerMode: 'none', //解决抽屉弹出有一个空白header的bug
