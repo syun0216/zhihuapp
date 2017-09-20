@@ -346,7 +346,7 @@ export default class ContentView extends Component {
                             position: 'absolute',
                             top: 0,
                             color: '#ff5858',
-                            left: 35
+                            left: 20
                         }}>{this.state.commentsCount}</Text>
                     </Button>
                 </Footer>

@@ -9,7 +9,7 @@ export default class ScrollTopUtil extends Component {
 
     render() {
         return (
-            <Animated.View style={{position:'absolute',right:0,bottom:this.props.positionBottom.interpolate({
+            <Animated.View style={{position:'absolute',right:10,bottom:this.props.positionBottom.interpolate({
                 inputRange: [0, 1],
                 outputRange: [-150, 50]
             })}} >

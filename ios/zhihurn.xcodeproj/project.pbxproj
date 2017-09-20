@@ -584,6 +584,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				929DFCB97B0447E5B9666862 /* Resources */,
 				C716B5301F70160100E220C5 /* Frameworks */,
+				C7A2AD901F721C0400F5BFC0 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -664,6 +665,21 @@
 				C72C73131F5D4A9100499D59 /* libBVLinearGradient.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		C7A2AD901F721C0400F5BFC0 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				4611C99B2B484B28A0EFB0CE /* libBVLinearGradient.a */,
+				BB4A9611F402437CBF21F576 /* libRNVectorIcons.a */,
+				4F567E01EF3244B98B802527 /* libReact.a */,
+				B12BEF99964842D5B15EFC6B /* libyoga.a */,
+				26877FD696014BEFA8751621 /* libcxxreact.a */,
+				249883BE6CAD40749C5665D3 /* libjschelpers.a */,
+				794BF8E319FE457A898F5A46 /* libthird-party.a */,
+				ADB3BCC3862E44D7A464BE19 /* libdouble-conversion.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

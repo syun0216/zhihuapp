@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import {StyleSheet,Text,ActivityIndicator} from 'react-native';
+import {StyleSheet,Text,ActivityIndicator,View} from 'react-native';
 import {ListItem,Button,Spinner,Body,Left,Right} from 'native-base';
 
 export default class FooterUtil extends Component{
@@ -11,12 +11,12 @@ export default class FooterUtil extends Component{
   }
   render(){
     return (
-      <ListItem style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
+      <View style={{flex:1,flexDirection:'row',alignItems:'center',justifyContent:'center'}}>
           <Button transparent onPress={this.props.callback}>
             {this.props.isLoading ? <ActivityIndicator size="small"/> : null}
             <Text style={{marginLeft:5}}>{this.props.message}</Text>
           </Button>
-      </ListItem>
+      </View>
     )
   }
 

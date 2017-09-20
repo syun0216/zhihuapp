@@ -303,9 +303,9 @@ class DashBoardView extends Component {
 //views
     render() {
         return (
-            <Container style={{backgroundColor:Colors.fontBlack}}>
-                {Platform.OS === 'android' ? <NewStatusBar androidBgColor="black"/> : <NewStatusBar androidBgColor="black" networkVisible={this.state.isHttpRequesting}
-                                                                                                    iosBgColor="transparent" iosHeight={0}
+            <Container>
+                {Platform.OS === 'android' ? <NewStatusBar androidBgColor="black"/> : <NewStatusBar networkVisible={this.state.isHttpRequesting}
+
                                                                                                     barStyle="light-content"/>}
                 <NewStatusBar androidBgColor="black" networkVisible={this.state.isHttpRequesting}
                               iosBgColor="transparent" iosHeight={0}
@@ -322,7 +322,7 @@ class DashBoardView extends Component {
                         </Right>
                     </Header> :
                     <Button style={{position: 'absolute', zIndex: 1000, top: 13, left: 23}} transparent
-                            onPress={() => this.props.navigation.navigate('DrawerOpen', {id: 1})}>
+                            onPress={() => this.props.navigation.navigate('DrawerOpen', {id: 112312})}>
                         <Image style={{width: 22, height: 22}} source={require('./assets/menu.png')}/>
                     </Button>
                 }
@@ -354,7 +354,6 @@ class DashBoardView extends Component {
     _renderNewsListView() {
 
         return <ListView
-            style={{backgroundColor: Colors.bgColor}}
             ref={(scrollView) => {
                 this._scrollView = scrollView;
             }}
@@ -376,7 +375,6 @@ class DashBoardView extends Component {
             scrollEventThrottle={20}
             refreshControl={
                 <RefreshControl
-                    style={{backgroundColor: Colors.fontBlack}}
                     refreshing={this.state.refreshing}
                     onRefresh={() => this._onRefreshToRequestFirstPageData()}
                 />}
@@ -650,7 +648,7 @@ const DashDrawerPage = DrawerNavigator({
     },
 
     contentComponent: props => {
-        // console.log('contentComponent');
+        console.log(props);
 
         return (
             <View style={{flex: 1, backgroundColor: '#242A2F'}}>
