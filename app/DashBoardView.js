@@ -172,13 +172,12 @@ class DashBoardView extends Component {
     _requestNextNewsData(day) {
         // this.setState({requestStatus: LOADING});
         api.getNewsByDate(day).then((data) => {
-            if (data.data !== null && data.data.stories.length !== 0) {
-                let _day = null;
-                // list_data.push(data.data.stories);
+            if (data.data !== null && data.data['stories'].length !== 0) {
+                list_data.push(data.data.stories);
                 data.data.date = data.data.date.substring(0, 4) + "/" + data.data.date.substring(4, 6) + "/" + data.data.date.substring(6, 8);
                 data.data.weekday = this.setWeekDay(data.data.date);
                 all_data.push(data.data);
-                list_data = list_data.concat(data.data.stories);
+                list_data = list_data.concat(data.data['stories']);
                 current_page = next_page;
                 this.setState({
                     newsData: this.state.newsData.cloneWithRowsAndSections(all_data),
@@ -235,7 +234,7 @@ class DashBoardView extends Component {
         _date.setDate(_date.getDate() + count); //获取AddDayCount天后的日期
         let y = _date.getFullYear();
         let m = _date.getMonth() + 1; //获取当前月份的日期
-        m = m > 10 ? m : "0" + m;
+        m = m >= 10 ? m : "0" + m;
         let d = _date.getDate();
         d = d >= 10 ? d : "0" + d;
         return y + "" + m + "" + d;
