@@ -159,16 +159,17 @@ export default class CommentView extends Component {
             <Modal isVisible={this.state.isModalVisible}
                    onBackButtonPress={() => this.setState({isModalVisible:false})}
                    onBackdropPress={() => this.setState({isModalVisible:false})}
-                   style={{flex:1,justifyContent:'center',alignItems:'center'}}>
-                <View style={{ width:_winWidth *0.8,height:200,backgroundColor:'white'}}>
-                    <View style={{borderBottomWidth:1,borderColor:Colors.fontBlack,height:120}}>
-                        <TextInput
-                            multiline={true}
-                            numberOfLines={10}
-                            onChangeText={(text) => this.setState({text})}
-                            style={{}}
-                            />
-                    </View>
+                   style={{flex:1,justifyContent:'center',alignItems:'center',borderRadius:10}}>
+                <View style={{ width:_winWidth *0.8,height:200,backgroundColor:'white',display:"flex",justifyContent:"center",alignItems:"center"}}>
+                    {/*<View style={{borderBottomWidth:1,borderColor:Colors.fontBlack,height:120}}>*/}
+                        {/*<TextInput*/}
+                            {/*multiline={true}*/}
+                            {/*numberOfLines={10}*/}
+                            {/*onChangeText={(text) => this.setState({text})}*/}
+                            {/*style={{}}*/}
+                            {/*/>*/}
+                    {/*</View>*/}
+                    <Text>暂未开放😯</Text>
                 </View>
             </Modal>
         )
