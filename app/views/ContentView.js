@@ -36,13 +36,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import ToastUtil from '../utils/ToastUtil';
 import Colors from '../utils/Colors';
+import {connect} from 'react-redux';
 
 let WeChat = require('react-native-wechat');
 
 
 _winWidth = Dimensions.get('window').width;
 _winHeight = Dimensions.get('window').height;
-export default class ContentView extends Component {
+ export default class ContentView extends Component {
 
     static navigationOptions = () => ({header: null, gesturesEnabled: true});
     // 构造
@@ -50,7 +51,6 @@ export default class ContentView extends Component {
 
     constructor(props) {
         super(props);
-
         WeChat.registerApp('wxde5c4e0148d6b550');
         this._top = props.navigation.state.params.preRoute === 'DashBoard' ? -220 : 0;
         // 初始状态
@@ -64,7 +64,8 @@ export default class ContentView extends Component {
             fadeInOpacity: new Animated.Value(0),
             showShareList: false,
             statusBarHeight: 0,
-            bounceWidth: 0
+            bounceWidth: 0,
+            color:props.theme.color
         };
     }
 
@@ -320,19 +321,19 @@ export default class ContentView extends Component {
                 {/*<View style={{flex:1,justifyContent:'center',alignItems:'center',height:200}}>*/}
                 {/*<View style={{height:3,width:this.state.bounceWidth,backgroundColor:Colors.main_blue}}/>*/}
                 {/*</View>*/}
-                <Footer style={{backgroundColor: 'white'}}>
+                <Footer style={{backgroundColor: this.state.color.bgActiveColor}}>
                     <Button transparent style={styles.bottomButton} onPress={() => this.props.navigation.goBack()}><Icon
-                        name='arrow-back' style={{color: '#959595'}}/></Button>
+                        name='arrow-back' style={{color: this.state.color.fontActiveColor}}/></Button>
                     <Button transparent style={styles.bottomButton}
                             onPress={() => this._toNextArticle()}><MaterialCommunityIcons name="chevron-double-down"
-                                                                                          style={[styles.IconStyle, {fontSize: 22}]}/></Button>
+                                                                                          style={{color:this.state.color.fontActiveColor,fontSize: 22}}/></Button>
                     <Button transparent style={styles.bottomButton}
                             onPress={() => this._toShowShareListView()}><MaterialCommunityIcons name="share-variant"
-                                                                                                style={[styles.IconStyle, {fontSize: 18}]}/></Button>
+                                                                                                style={{color:this.state.color.fontActiveColor,fontSize: 18}}/></Button>
                     <Button transparent style={styles.bottomButton} onPress={() => this.addNewsToFavorite()}>
                         {this.state.favoriteChecked ?
                             <MaterialIcons name='favorite' style={{fontSize: 20, color: '#ff5858'}}/> :
-                            <MaterialIcons name="favorite-border" style={[styles.IconStyle, {fontSize: 20}]}/>}
+                            <MaterialIcons name="favorite-border" style={{color:this.state.color.fontActiveColor,fontSize: 20}}/>}
                     </Button>
 
                     <Button transparent style={[styles.bottomButton, {position: 'relative'}]}
@@ -341,7 +342,7 @@ export default class ContentView extends Component {
                                 count: this.state.commentsCount
                             })}>
                         <MaterialCommunityIcons name="comment-processing-outline"
-                                                style={[styles.IconStyle, {fontSize: 18}]}/>
+                                                style={{color:this.state.color.fontActiveColor,fontSize: 18}}/>
                         <Text style={{
                             position: 'absolute',
                             top: 0,
@@ -425,6 +426,7 @@ export default class ContentView extends Component {
     }
 
 }
+
 const styles = StyleSheet.create({
     bottomButton: {
         flex: 1,

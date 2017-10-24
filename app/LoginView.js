@@ -20,7 +20,7 @@ import {
     Icon
 } from 'native-base';
 import NewStatusBar from './components/NewStatusBar';
-import UserStore from './store/UserStore';
+import UserStore from './cache/UserCache';
 import Colors from './utils/Colors';
 import ToastUtil from './utils/ToastUtil';
 import Modal from 'react-native-modal';

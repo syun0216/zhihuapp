@@ -26,7 +26,8 @@ export default class CommentView extends Component {
             isShortCommentsShow: false,
             arrow:new Animated.Value(0),
             opacity:new Animated.Value(0),
-            isModalVisible:false
+            isModalVisible:false,
+            color:props.theme.color
         };
     }
 
@@ -124,7 +125,7 @@ export default class CommentView extends Component {
                 <Header style={{backgroundColor:'white'}}>
                     <Left></Left>
                     <Body><Text style={{
-                        color: '#1e90ff',
+                        color: this.state.color.bgDefaultColor,
                         fontSize: 18
                     }}>{this.props.navigation.state.params.count}条评论</Text></Body>
                     <Right>
@@ -142,11 +143,11 @@ export default class CommentView extends Component {
                         <Icon name='arrow-back'
                               style={{
                                   fontSize: 22,
-                                  color: '#ccc'
+                                  color: this.state.color.bgDefaultColor
                               }}/></Button></Left>
                     <Body><Button transparent onPress={() => this.setState({isModalVisible:true})}>
-                        <FontAwesome name="pencil-square-o" style={{fontSize: 20, color: Colors.fontBlack}}/>
-                        <Text style={{marginLeft:5}}>写评论</Text>
+                        <FontAwesome name="pencil-square-o" style={{fontSize: 20, color: this.state.color.bgDefaultColor}}/>
+                        <Text style={{marginLeft:5,color:this.state.color.bgDefaultColor}}>写评论</Text>
                     </Button></Body>
                     <Right></Right>
                 </Footer>

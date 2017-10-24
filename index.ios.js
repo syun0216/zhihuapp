@@ -12,8 +12,10 @@ import {
   View
 } from 'react-native';
 import {Root} from 'native-base'
-import DashBoardView from './app/DashBoardView';
+import App from './app/App';
 import SplashScreen from 'react-native-splash-screen'
+import {Provider} from 'react-redux';
+import store from './app/store/store'
 
 export default class zhihurn extends Component {
     componentDidMount() {
@@ -22,7 +24,9 @@ export default class zhihurn extends Component {
   render() {
     return (
       <Root>
-        <DashBoardView/>
+          <Provider store={store}>
+            <App/>
+          </Provider>
       </Root>
     );
   }

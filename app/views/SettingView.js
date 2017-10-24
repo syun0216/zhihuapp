@@ -2,6 +2,7 @@ import React,{Component} from 'react';
 import {View,StyleSheet,TouchableOpacity} from 'react-native';
 import { Container, Header, Content, ListItem, Text, Radio, Right,Icon,Button,Left ,Body} from 'native-base';
 import Colors from '../utils/Colors';
+import {CHANGE_THEME} from '../actions/themeActions';
 
 export default class SettingView extends Component{
     static navigationOptions = () => ({
@@ -13,9 +14,10 @@ export default class SettingView extends Component{
 
     constructor(props){
         super(props);
+        console.log("setting",props.theme);
         this.state = {
-            bgColor:"#fff",
-            fontColor:Colors.fontBlack
+            bgColor:props.theme.color.bgActiveColor,
+            fontColor:props.theme.color.fontActiveColor
         }
     }
 
@@ -65,11 +67,13 @@ export default class SettingView extends Component{
 
     changeColor(color){
         this.setState({
-           bgColor:color.bgDefaultColor,
+           bgColor:color.bgActiveColor,
            fontColor:color.fontActiveColor
         });
+        this.props.CHANGE_THEME(color);
     }
 }
+
 
 const styles = StyleSheet.create({
     settingItem:{

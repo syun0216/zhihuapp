@@ -58,7 +58,7 @@ import FooterUtil from './utils/FooterUtil';
 import LoginView from "./LoginView";
 import Colors from './utils/Colors';
 
-import UserStore from './store/UserStore';
+import UserStore from './cache/UserCache';
 
 const LOADING = 0;
 const LOAD_SUCCESS = 1;
