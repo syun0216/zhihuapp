@@ -287,14 +287,14 @@ export default class ContentView extends Component {
                             <Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 6}}>微信好友</Text>
                         </View>
                     </TouchableOpacity>
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Image style={{width: 36, height: 36}} source={require('../assets/qq.png')}/>
-                        <Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 4}}>qq</Text>
-                    </View>
-                    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Image style={{width: 32, height: 32}} source={require('../assets/weibo.png')}/>
-                        <Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 10}}>微博</Text>
-                    </View>
+                    {/*<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>*/}
+                        {/*<Image style={{width: 36, height: 36}} source={require('../assets/qq.png')}/>*/}
+                        {/*<Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 4}}>qq</Text>*/}
+                    {/*</View>*/}
+                    {/*<View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>*/}
+                        {/*<Image style={{width: 32, height: 32}} source={require('../assets/weibo.png')}/>*/}
+                        {/*<Text style={{fontSize: 12, color: Colors.fontBlack, marginTop: 10}}>微博</Text>*/}
+                    {/*</View>*/}
                 </View>
             </Animated.View>
         )
@@ -346,7 +346,7 @@ export default class ContentView extends Component {
                             position: 'absolute',
                             top: 0,
                             color: '#ff5858',
-                            left: 20
+                            left: 50
                         }}>{this.state.commentsCount}</Text>
                     </Button>
                 </Footer>
@@ -428,7 +428,9 @@ export default class ContentView extends Component {
 const styles = StyleSheet.create({
     bottomButton: {
         flex: 1,
-        marginTop: 5
+        marginTop: 5,
+        alignItems:'center',
+        justifyContent:'center',
     },
     IconStyle: {
         color: "#959595",
