@@ -37,6 +37,7 @@ import FullScreenLoading from './components/FullScreenLoading';
 import NewStatusBar from './components/NewStatusBar';
 import ErrorView from './components/ErrorView';
 import api from './api/_index';
+import Feather from 'react-native-vector-icons/Feather';
 
 import ToastUtil from './utils/ToastUtil';
 import FooterUtil from './utils/FooterUtil';
@@ -76,7 +77,7 @@ export default class DashBoardView extends Component {
 
     constructor(props) {
         super(props);
-        console.log("props",props);
+        console.log("props",props.theme.color);
         let ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
             sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -93,7 +94,7 @@ export default class DashBoardView extends Component {
             titleData: null,
             positionBottom: new Animated.Value(0),
             swiperShow: false,
-
+            color:props.theme.color
         }
     }
 
@@ -327,7 +328,7 @@ export default class DashBoardView extends Component {
     _renderScrollTopView() {
         return this.state.titleData === null ? null : <ScrollTopUtil toTop={() => {
             this._scrollView.scrollTo({y: 0, animated: true});
-        }} positionBottom={this.state.positionBottom}/>
+        }} positionBottom={this.state.positionBottom} color={this.state.color.bgDefaultColor}/>
     }
 
     _renderErrorView() {
@@ -521,12 +522,12 @@ export default class DashBoardView extends Component {
         //     </View>
         // );
         return (
-            <LinearGradient colors={['#000', '#192f6a', '#4c669f']} style={styles.linearGradient}>
+            <LinearGradient colors={[this.state.color.bgDefaultColor, this.state.color.bgActiveColor, Colors.bgColor]} style={styles.linearGradient}>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     {/*<View style={{flex:1,alignItems:'center',justifyContent:'center'}} >*/}
                     {/*</View>*/}
                     <View>
-                        <Text style={styles.buttonText} onPress={() => {
+                        <Text style={[styles.buttonText,{color:this.state.color.fontActiveColor}]} onPress={() => {
                             this._scrollView.scrollTo({y: 0, animated: true});
                         }}>
                             {sectionData.date} {sectionData.weekday}
@@ -614,5 +615,6 @@ const styles = StyleSheet.create({
         margin: 10,
         color: '#ffffff',
         backgroundColor: 'transparent',
+        marginTop:10
     },
 });

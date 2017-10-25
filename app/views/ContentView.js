@@ -346,7 +346,7 @@ _winHeight = Dimensions.get('window').height;
                         <Text style={{
                             position: 'absolute',
                             top: 0,
-                            color: '#ff5858',
+                            color: this.state.color.fontActiveColor,
                             left: 50
                         }}>{this.state.commentsCount}</Text>
                     </Button>

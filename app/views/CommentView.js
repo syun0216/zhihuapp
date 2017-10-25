@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, View, Image,Animated,Easing,ScrollView,Dimensions,TextInput} from 'react-native';
+import {Text, View, Image,Animated,Easing,ScrollView,Dimensions,TextInput,TouchableOpacity} from 'react-native';
 import {Container, Header, Footer, Body, Content, Left, Right, Button, Icon} from 'native-base';
 import api from '../api/_index';
 import NewStatusBar from '../components/NewStatusBar';
@@ -122,10 +122,10 @@ export default class CommentView extends Component {
     render() {
         return (
             <Container>
-                <Header style={{backgroundColor:'white'}}>
+                <Header style={{backgroundColor:this.state.color.bgActiveColor}}>
                     <Left></Left>
                     <Body><Text style={{
-                        color: this.state.color.bgDefaultColor,
+                        color: this.state.color.fontActiveColor,
                         fontSize: 18
                     }}>{this.props.navigation.state.params.count}条评论</Text></Body>
                     <Right>
@@ -143,11 +143,11 @@ export default class CommentView extends Component {
                         <Icon name='arrow-back'
                               style={{
                                   fontSize: 22,
-                                  color: this.state.color.bgDefaultColor
+                                  color: "#959595"
                               }}/></Button></Left>
-                    <Body><Button transparent onPress={() => this.setState({isModalVisible:true})}>
-                        <FontAwesome name="pencil-square-o" style={{fontSize: 20, color: this.state.color.bgDefaultColor}}/>
-                        <Text style={{marginLeft:5,color:this.state.color.bgDefaultColor}}>写评论</Text>
+                    <Body><Button transparent style={{marginLeft:10}} onPress={() => this.setState({isModalVisible:true})}>
+                        <FontAwesome name="pencil-square-o" style={{fontSize: 20, color: "#959595"}}/>
+                        <Text style={{marginLeft:5,color:"#959595"}}>写评论</Text>
                     </Button></Body>
                     <Right></Right>
                 </Footer>

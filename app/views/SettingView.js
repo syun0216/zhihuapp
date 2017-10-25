@@ -25,7 +25,7 @@ export default class SettingView extends Component{
        return (
            <Container>
                <Header style={{backgroundColor:this.state.bgColor}}>
-                   <Left><Button  transparent onPress={() => this.props.navigation.goBack()}><Icon
+                   <Left><Button  transparent onPress={() => this.props.navigation.navigate('Home')}><Icon
                        name='arrow-back' style={{color: this.state.fontColor}}/></Button></Left>
                    <Body><Text style={{color:this.state.fontColor}}>设置</Text></Body>
                    <Right></Right>
