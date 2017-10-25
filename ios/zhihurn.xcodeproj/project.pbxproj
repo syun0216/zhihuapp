@@ -51,8 +51,8 @@
 		C716B5361F70161A00E220C5 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C716B5351F70161A00E220C5 /* libsqlite3.0.tbd */; };
 		C716B5381F70162B00E220C5 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C716B5371F70162B00E220C5 /* libc++.tbd */; };
 		C716B53A1F70163A00E220C5 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = C716B5391F70163A00E220C5 /* libz.tbd */; };
-		C7693D0F1F9EEC2500942733 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = C7693D0D1F9EEC2500942733 /* main.jsbundle */; };
-		C7693D101F9EEC2500942733 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = C7693D0E1F9EEC2500942733 /* assets */; };
+		C77270D81FA033BD00895958 /* main.jsbundle in Resources */ = {isa = PBXBuildFile; fileRef = C77270D61FA033BD00895958 /* main.jsbundle */; };
+		C77270D91FA033BD00895958 /* assets in Resources */ = {isa = PBXBuildFile; fileRef = C77270D71FA033BD00895958 /* assets */; };
 		C7FA17201F4EA6C300299CCE /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = C7FA171F1F4EA6C300299CCE /* Fonts */; };
 		CA141600367A40CD97658400 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4611C99B2B484B28A0EFB0CE /* libBVLinearGradient.a */; };
 		D8203057631C44738DD7A824 /* libyoga.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B12BEF99964842D5B15EFC6B /* libyoga.a */; };
@@ -367,8 +367,8 @@
 		C716B5351F70161A00E220C5 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		C716B5371F70162B00E220C5 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		C716B5391F70163A00E220C5 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		C7693D0D1F9EEC2500942733 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = "<group>"; };
-		C7693D0E1F9EEC2500942733 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
+		C77270D61FA033BD00895958 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = bundle/main.jsbundle; sourceTree = "<group>"; };
+		C77270D71FA033BD00895958 /* assets */ = {isa = PBXFileReference; lastKnownFileType = folder; name = assets; path = bundle/assets; sourceTree = "<group>"; };
 		C7FA171F1F4EA6C300299CCE /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		D86F63AD58F1406A86D5054E /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		DB11DEAA81B24CC9920ABE49 /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RCTWeChat.xcodeproj; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; };
@@ -506,8 +506,8 @@
 		13B07FAE1A68108700A75B9A /* zhihurn */ = {
 			isa = PBXGroup;
 			children = (
-				C7693D0E1F9EEC2500942733 /* assets */,
-				C7693D0D1F9EEC2500942733 /* main.jsbundle */,
+				C77270D71FA033BD00895958 /* assets */,
+				C77270D61FA033BD00895958 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -1105,7 +1105,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				C7FA17201F4EA6C300299CCE /* Fonts in Resources */,
-				C7693D0F1F9EEC2500942733 /* main.jsbundle in Resources */,
+				C77270D81FA033BD00895958 /* main.jsbundle in Resources */,
 				85D5240D34B94A97B39D5A49 /* Roboto_medium.ttf in Resources */,
 				357CDB0A32594F7EBDF8D7F1 /* Roboto.ttf in Resources */,
 				333AF0A3510D430AAC5AB6D7 /* rubicon-icon-font.ttf in Resources */,
@@ -1113,7 +1113,7 @@
 				AEC7115BB46B4065A3DB06A9 /* EvilIcons.ttf in Resources */,
 				9E5D4112440A440EB9B4E5E3 /* FontAwesome.ttf in Resources */,
 				7E0434722B3A4145AA50D574 /* Ionicons.ttf in Resources */,
-				C7693D101F9EEC2500942733 /* assets in Resources */,
+				C77270D91FA033BD00895958 /* assets in Resources */,
 				A0608D35CF6647D681F60C9B /* MaterialIcons.ttf in Resources */,
 				B0825A6D95F944AC81627028 /* Foundation.ttf in Resources */,
 				887241797E7D4C48859BDCC7 /* MaterialCommunityIcons.ttf in Resources */,
