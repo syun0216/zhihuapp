@@ -5,7 +5,7 @@ const themeReducer = (state={color:defaultColor},action) => {
     // "use strict";
     switch (action.type){
         case "CHANGE_THEME":
-            return state = {...state,color:action.payload};break;
+            return state = {...state,color:action.color};break;
         default:return state;break;
     }
 }

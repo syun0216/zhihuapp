@@ -14,20 +14,20 @@ export default class SettingView extends Component{
 
     constructor(props){
         super(props);
-        console.log("setting",props.theme);
+        console.log(props);
         this.state = {
-            bgColor:props.theme.color.bgActiveColor,
-            fontColor:props.theme.color.fontActiveColor
+            color: props.screenProps.theme
         }
     }
 
     render(){
+       let {theme} = this.props.screenProps;
        return (
            <Container>
-               <Header style={{backgroundColor:this.state.bgColor}}>
-                   <Left><Button  transparent onPress={() => this.props.navigation.navigate('Home')}><Icon
-                       name='arrow-back' style={{color: this.state.fontColor}}/></Button></Left>
-                   <Body><Text style={{color:this.state.fontColor}}>设置</Text></Body>
+               <Header style={{backgroundColor:theme.bgActiveColor}}>
+                   <Left><Button  transparent onPress={() => this.props.navigation.goBack()}><Icon
+                       name='arrow-back' style={{color: theme.fontActiveColor}}/></Button></Left>
+                   <Body><Text style={{color:theme.fontActiveColor}}>设置</Text></Body>
                    <Right></Right>
                </Header>
                <Content>
@@ -39,14 +39,12 @@ export default class SettingView extends Component{
 
     _renderSettingItem(){
         let _data = [
-            {name:"纯黑",bgDefaultColor:Colors.sidebar_default_color,bgActiveColor:Colors.sidebar_active_color,
-            fontDefaultColor:Colors.sidebar_font_default_color,fontActiveColor:Colors.sidebar_font_active_color},
             {name:"红",bgDefaultColor:"#972a1d",bgActiveColor:"#f12713",fontDefaultColor:Colors.sidebar_font_default_color,fontActiveColor:Colors.sidebar_font_active_color},
             {name:"蓝",bgDefaultColor:"#3698da",bgActiveColor:"#24a6f2",fontDefaultColor:"#ccc",fontActiveColor:"#fff"},
             {name:"紫",bgDefaultColor:"#9b12b4",bgActiveColor:"#be55ed",fontDefaultColor:Colors.sidebar_font_default_color,fontActiveColor:Colors.sidebar_font_active_color},
             {name:"绿",bgDefaultColor:"#27a75c",bgActiveColor:"#87d27b",fontDefaultColor:Colors.sidebar_font_default_color,fontActiveColor:Colors.sidebar_font_active_color},
             {name:"橙",bgDefaultColor:"#fb9507",bgActiveColor:"#f4d03f",fontDefaultColor:Colors.sidebar_font_default_color,fontActiveColor:Colors.sidebar_font_active_color},
-            {name:"白",bgDefaultColor:"#abb8b8",bgActiveColor:"#dadfe3",fontDefaultColor:"#000",fontActiveColor:"#ff5858"},
+            {name:"白",bgDefaultColor:"#abb8b8",bgActiveColor:"#dadfe3",fontDefaultColor:"#000",fontActiveColor:"#000"},
         ];
 
             return (
@@ -66,11 +64,7 @@ export default class SettingView extends Component{
     }
 
     changeColor(color){
-        this.setState({
-           bgColor:color.bgActiveColor,
-           fontColor:color.fontActiveColor
-        });
-        this.props.CHANGE_THEME(color);
+        this.props.screenProps.changeTheme(color);
     }
 }
 

@@ -65,7 +65,8 @@ _winHeight = Dimensions.get('window').height;
             showShareList: false,
             statusBarHeight: 0,
             bounceWidth: 0,
-            color:props.theme.color
+            color: {name:"纯白",bgDefaultColor:"#fff",bgActiveColor:"#fff",
+            fontDefaultColor:"#959595",fontActiveColor:"#000"}
         };
     }
 

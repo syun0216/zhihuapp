@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import {Root} from 'native-base'
 import App from './app/App';
+import MapStateAndProps from './app/MapStateAndProps'
 import SplashScreen from 'react-native-splash-screen'
 import {Provider} from 'react-redux';
 import store from './app/store/store'
@@ -25,7 +26,7 @@ export default class zhihurn extends Component {
     return (
       <Root>
           <Provider store={store}>
-            <App/>
+            <MapStateAndProps/>
           </Provider>
       </Root>
     );

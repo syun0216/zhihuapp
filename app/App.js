@@ -58,23 +58,9 @@ import SettingView from './views/SettingView';
 
 import LoginView from './LoginView';
 
-function mapStateToProps(state){
-    return {
-        theme:state.theme
-    }
-}
-
-function mapDispatchToProps(dispatch){
-    return bindActionCreators(actionCreator,dispatch)
-}
-
-const App = connect(mapStateToProps,mapDispatchToProps)(DashBoardView);
-const content = connect(mapStateToProps,mapDispatchToProps)(ContentView);
-const setting =connect(mapStateToProps,mapDispatchToProps)(SettingView);
-const comment = connect(mapStateToProps,mapDispatchToProps)(CommentView);
 const DashDrawerPage = DrawerNavigator({
     Home: {
-        screen: App,
+        screen: DashBoardView,
     },
     Comic: {
         screen: ComicThemeView
@@ -196,11 +182,11 @@ const DashDrawerPage = DrawerNavigator({
 let mainView = StackNavigator({
     Home: {screen: DashDrawerPage},
     // Dash: {screen: DashBoardView},
-    Content: {screen: content},
-    Comment: {screen: comment},
+    Content: {screen: ContentView},
+    Comment: {screen: CommentView},
     Login: {screen: LoginView},
     // Test: {screen: TestWechat},
-    Setting:{screen:setting}
+    Setting:{screen:SettingView}
 }, {
     // initialRouteName: 'DashDrawerPage',
     headerMode: 'none', //解决抽屉弹出有一个空白header的bug

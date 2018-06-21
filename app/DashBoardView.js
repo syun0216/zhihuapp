@@ -61,6 +61,7 @@ let user_id = null;
 export default class DashBoardView extends Component {
     _scrollView = null;
     isFirstTime = false; //判断是不是第一次触发listview的onendreach方法
+    _timer = null;
     static navigationOptions = {
         header: null,
         drawerLabel: '主页',
@@ -77,7 +78,6 @@ export default class DashBoardView extends Component {
 
     constructor(props) {
         super(props);
-        console.log("props",props.theme.color);
         let ds = new ListView.DataSource({
             rowHasChanged: (r1, r2) => r1 !== r2,
             sectionHeaderHasChanged: (s1, s2) => s1 !== s2
@@ -94,7 +94,8 @@ export default class DashBoardView extends Component {
             titleData: null,
             positionBottom: new Animated.Value(0),
             swiperShow: false,
-            color:props.theme.color
+            color: {name:"纯白",bgDefaultColor:"#fff",bgActiveColor:"#fff",
+            fontDefaultColor:"#959595",fontActiveColor:"#000"}
         }
     }
 
@@ -112,8 +113,16 @@ export default class DashBoardView extends Component {
                 isLogin: true,
             });
         });
-        this._requestNewsData();
+        this._timer = setTimeout(() => {
+            this._requestNewsData();
+            clearTimeout(this._timer);
+        },300)
+    }
 
+    componentWillUnmount() {
+        if(this._timer != null) {
+            clearTimeout(this._timer);
+        }
     }
 
 //requests
@@ -328,7 +337,7 @@ export default class DashBoardView extends Component {
     _renderScrollTopView() {
         return this.state.titleData === null ? null : <ScrollTopUtil toTop={() => {
             this._scrollView.scrollTo({y: 0, animated: true});
-        }} positionBottom={this.state.positionBottom} color={this.state.color.bgDefaultColor}/>
+        }} positionBottom={this.state.positionBottom} color={this.props.screenProps.theme.bgDefaultColor}/>
     }
 
     _renderErrorView() {
@@ -496,38 +505,14 @@ export default class DashBoardView extends Component {
     }
 
     _renderSectionHeader(sectionData, sectionID) {
-        // console.log(sectionData);
-        // return (
-        //     <View style={{
-        //         marginTop: 10,
-        //         marginLeft: 10,
-        //         marginRight: 10,
-        //         width: 200,
-        //         backgroundColor: Colors.main_yellow,
-        //         height: 30,
-        //         flex: 1,
-        //         justifyContent: 'center',
-        //         alignItems: 'center',
-        //         borderRadius: 15,
-        //         shadowColor: '#5b7392',
-        //         shadowOffset: {width: 0, height: 2},
-        //         shadowOpacity: 0.8,
-        //         shadowRadius: 2,
-        //     }}>
-        //         <Text style={{
-        //             color: '#fff',
-        //             textAlign: 'center',
-        //             marginTop: 5
-        //         }}>{sectionData.date}{sectionData.weekday}</Text>
-        //     </View>
-        // );
+        let {theme} = this.props.screenProps;
         return (
-            <LinearGradient colors={[this.state.color.bgDefaultColor, this.state.color.bgActiveColor, Colors.bgColor]} style={styles.linearGradient}>
+            <LinearGradient colors={[theme.bgDefaultColor, theme.bgActiveColor, Colors.bgColor]} style={styles.linearGradient}>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'}}>
                     {/*<View style={{flex:1,alignItems:'center',justifyContent:'center'}} >*/}
                     {/*</View>*/}
                     <View>
-                        <Text style={[styles.buttonText,{color:this.state.color.fontActiveColor}]} onPress={() => {
+                        <Text style={[styles.buttonText,{color:theme.fontActiveColor}]} onPress={() => {
                             this._scrollView.scrollTo({y: 0, animated: true});
                         }}>
                             {sectionData.date} {sectionData.weekday}
